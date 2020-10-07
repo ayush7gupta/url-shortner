@@ -29,7 +29,7 @@ apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-def appName = 'restful-stack'
+def appName = 'uri shortner'
 group = 'com.urlshortnerapi'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
