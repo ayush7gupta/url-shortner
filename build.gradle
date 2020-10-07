@@ -1,0 +1,77 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.1.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.netflix.nebula:gradle-ospackage-plugin:2.2.6'
+        classpath 'no.entitas.gradle.jaxb:gradle-jaxb-plugin:2.0'
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.1.RELEASE"
+    }
+}
+
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+def appName = 'restful-stack'
+group = 'com.urlshortnerapi'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+dependencies {
+    compile("org.projectlombok:lombok:$LOMBOK_VERSION")
+
+    testCompile(group: "org.powermock",name: "powermock-api-mockito2", version: "$POWER_MOCKITO_VERSION"){
+        exclude group: 'org.log4j'
+    }
+    testCompile (group: 'junit', name: 'junit', version: "$JUNIT_VERSION")
+
+    // https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper
+    compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '9.0.36'
+
+    // https://mvnrepository.com/artifact/javax.servlet/jstl
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+
+    // https://mvnrepository.com/artifact/org.webjars/jquery
+    compile group: 'org.webjars', name: 'jquery', version: '3.4.1'
+
+    // https://mvnrepository.com/artifact/org.webjars/bootstrap
+    compile group: 'org.webjars', name: 'bootstrap', version: '4.3.1'
+
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    compile("org.springframework.boot:spring-boot-starter-web"){
+        exclude group: 'com.fasterxml.jackson.datatype'
+        exclude group: 'com.fasterxml.jackson.module'
+    }
+    compile("org.springframework.session:spring-session-core")
+
+    compile("org.springframework.boot:spring-boot-starter-actuator"){
+        exclude group: 'com.fasterxml.jackson'
+        exclude group: 'com.fasterxml.jackson.datatype'
+        exclude group: 'com.fasterxml.jackson.module'
+    }
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-mongodb
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version: '2.1.5.RELEASE'
+
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.3.1.RELEASE'
+
+
+}
